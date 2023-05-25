@@ -1,5 +1,5 @@
 const { updateUser, getUserByEmail } = require('../models/user.model');
-const { createPayment } = require('../models/payment.model');
+const { createPayment, getAllPayments } = require('../models/payment.model');
 
 const webhookController = async (req, res) => {
   console.log(req.body);
@@ -31,6 +31,23 @@ const webhookController = async (req, res) => {
   }
 };
 
+const getPaymentsController = async (req, res) => {
+  try {
+    const payments = await getAllPayments();
+
+    res.status(200).json({
+      success: true,
+      data: payments,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   webhookController,
+  getPaymentsController,
 };

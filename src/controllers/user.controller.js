@@ -169,7 +169,7 @@ const upgradeUserController = async (req, res) => {
       email: req.user.email,
       name: req.user.fullname,
       amount: 200,
-      callback_url: 'https://arrivo.onrender.com/api/v1/payments/webhook/',
+      callback_url: 'https://arrivo.onrender.com/api/v1/payments/webhook',
     });
 
     let config = {

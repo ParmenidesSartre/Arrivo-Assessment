@@ -12,7 +12,6 @@ const authenticate = async (req, res, next) => {
 
   if (decoded) {
     const user = await getUserById(decoded.id);
-    console.log(user);
 
     req.user = user;
     next();
