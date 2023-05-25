@@ -1,6 +1,7 @@
 const pool = require('../config/database');
 
 exports.createPayment = async (payment) => {
+  console.log(payment);
   try {
     const { payment_id, amount, payment_method, status } = payment;
     const result = await pool.query(
