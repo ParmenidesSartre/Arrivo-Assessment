@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./src/index.js",
-    "start": "pm2 start ./src/index.js --name arrivo"
+    "pm2": "pm2 start ./src/index.js --name arrivo",
+    "start" : "node ./src/index.js",
   },
   "keywords": [
     "Arrivo",
