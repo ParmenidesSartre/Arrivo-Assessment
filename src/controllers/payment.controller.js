@@ -2,7 +2,7 @@ const { updateUser, getUserByEmail } = require('../models/user.model');
 const { createPayment, getAllPayments } = require('../models/payment.model');
 
 const webhookController = async (req, res) => {
-  console.log(req);
+  console.log(req.body);
   try {
     const { id, amount, payment_method, state, email } = req.body;
     const payment = await createPayment({
