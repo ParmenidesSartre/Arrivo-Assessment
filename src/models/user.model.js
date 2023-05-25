@@ -43,10 +43,30 @@ exports.getUserByEmail = async (email) => {
   }
 };
 
-exports.updateUser = async (id, column, value) => {
+exports.updateUser = async (id, updates) => {
   try {
-    const query = `UPDATE users SET ${column} = $1, updatedAt = now() WHERE id = $2 RETURNING *`;
-    const values = [value, id];
+    // Start constructing the query
+    const queryStart = 'UPDATE users SET ';
+    const queryEnd = ' WHERE id = $1 RETURNING *';
+    const values = [id];
+
+    // Array to hold the SET clauses
+    const setClauses = [];
+
+    // Iterate over the updates object to populate the SET clauses and values arrays
+    Object.keys(updates).forEach((key, index) => {
+      setClauses.push(`${key} = $${index + 2}`);
+      values.push(updates[key]);
+    });
+
+    // Add the updated_at = now() clause
+    setClauses.push(`updatedAt = now()`);
+
+    // Join the SET clauses into a single string
+    const setClause = setClauses.join(', ');
+
+    // Construct the final query
+    const query = queryStart + setClause + queryEnd;
 
     const result = await pool.query(query, values);
     return result.rows[0];

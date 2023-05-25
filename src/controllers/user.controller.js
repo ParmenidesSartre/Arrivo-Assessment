@@ -7,9 +7,13 @@ const {
   getUserByEmail,
 } = require('../models/user.model');
 const axios = require('axios');
+const dotenv = require('dotenv');
 const { signToken } = require('../utils/jwt.utils');
 const { hashPassword, comparePassword } = require('../utils/hash.utils');
 const { removePassword, removePasswords } = require('../utils/utils');
+
+// Load environment variables from .env file
+dotenv.config();
 
 const loginUserController = async (req, res) => {
   try {
@@ -165,7 +169,7 @@ const upgradeUserController = async (req, res) => {
       email: req.user.email,
       name: req.user.fullname,
       amount: 200,
-      callback_url: 'http://example.com/webhook/',
+      callback_url: 'https://arrivo.onrender.com/api/v1/payments/webhook/',
     });
 
     let config = {
@@ -174,7 +178,7 @@ const upgradeUserController = async (req, res) => {
       url: 'https://www.billplz-sandbox.com/api/v3/bills',
       headers: {
         Authorization:
-          'Basic OWIyNmFiNjgtMzllNi00YzM4LTg5YjQtNzRjZDEzZjRhZDZiOg==',
+          `Basic ${process.env.BILLPLZ_API_KEY}`,
         'Content-Type': 'application/json',
       },
       data: data,

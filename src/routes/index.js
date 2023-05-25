@@ -3,6 +3,7 @@ const router = require('express').Router();
 const userRoutes = require('./user.routes');
 const categoryRoutes = require('./category.routes');
 const postRoutes = require('./post.routes');
+const paymentRoutes = require('./payment.routes');
 
 const defaultRoutes = [
   {
@@ -16,6 +17,10 @@ const defaultRoutes = [
   {
     path: '/posts',
     route: postRoutes,
+  },
+  {
+    path: '/payments',
+    route: paymentRoutes,
   },
 ];
 
