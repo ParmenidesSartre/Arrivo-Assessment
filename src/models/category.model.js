@@ -33,10 +33,31 @@ exports.getCategoryById = async (id) => {
   }
 };
 
-exports.updateCategory = async (id, column, value) => {
+// Code C Refactored
+exports.updatePost = async (id, updates) => {
   try {
-    const query = `UPDATE categories SET ${column} = $1, updated_at = now() WHERE id = $2 RETURNING *`;
-    const values = [value, id];
+    // Start constructing the query
+    const queryStart = 'UPDATE posts SET ';
+    const queryEnd = ' WHERE id = $1 RETURNING *';
+    const values = [id];
+
+    // Array to hold the SET clauses
+    const setClauses = [];
+
+    // Iterate over the updates object to populate the SET clauses and values arrays
+    Object.keys(updates).forEach((key, index) => {
+      setClauses.push(`${key} = $${index + 2}`);
+      values.push(updates[key]);
+    });
+
+    // Add the updated_at = now() clause
+    setClauses.push(`updated_at = now()`);
+
+    // Join the SET clauses into a single string
+    const setClause = setClauses.join(', ');
+
+    // Construct the final query
+    const query = queryStart + setClause + queryEnd;
 
     const result = await pool.query(query, values);
     return result.rows[0];
