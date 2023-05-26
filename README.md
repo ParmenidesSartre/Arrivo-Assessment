@@ -7,7 +7,7 @@ This repository contains the back-end code for Arrivo-Assessment, a small web ap
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Routes](#routes)
-- [Possible Improvement](#Possible Improvement)
+- [Possible Improvement](#improvement)
 
 ## Requirements
 
@@ -63,7 +63,7 @@ The server will start at `http://localhost:3000`.
 | `/payments`             | GET    | None                                  | `getPaymentsController`             | Retrieves all payments                                                                                              |
 
 
-## Possible Improvement
+## Improvement
 - Centralized error handling to avoid repeating
 - I would prefer to be able to use ORM as i think it help me to go faster
 - Better handling of webhook
