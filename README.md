@@ -71,3 +71,4 @@ The server will start at `http://localhost:3000`.
 ## Problem faced
 - Lack of ORM
 - Making the webhook to work, i think i use the wrong one as they lack payment method field.
+- Implement husky but i cannot finish it. 
